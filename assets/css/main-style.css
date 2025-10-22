@@ -379,6 +379,9 @@ body {
 /* Testimonials */
 .testimonials-section {
   padding: 100px 0;
+  overflow: visible;
+  max-height: none;
+  height: auto;
 }
 
 .testimonial-card {
@@ -387,8 +390,9 @@ body {
   border-radius: 20px;
   padding: 2rem;
   text-align: center;
-  height: 100%;
+  height: auto;
   backdrop-filter: blur(10px);
+  overflow: visible;
 }
 
 .testimonial-avatar {
@@ -652,6 +656,9 @@ body {
 .faq-section {
   padding: 80px 0;
   background: rgba(30, 41, 59, 0.2);
+  overflow: visible;
+  max-height: none;
+  height: auto;
 }
 
 .faq-header {
@@ -697,6 +704,9 @@ body {
 
 .faq-accordion {
   background: transparent;
+  overflow: visible;
+  max-height: none;
+  height: auto;
 }
 
 .faq-item {

@@ -220,6 +220,28 @@
       margin: 3rem 0;
     }
 
+    .faq-accordion {
+      overflow: visible;
+      max-height: none;
+      height: auto;
+    }
+
+    .faq-section .col-lg-6 {
+      overflow: visible;
+      max-height: none;
+      height: auto;
+    }
+
+    .testimonials-section .row {
+      overflow: visible;
+      max-height: none;
+      height: auto;
+    }
+
+    .buy-btn {
+      text-align: center;
+    }
+
     .guarantee-section {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(52, 211, 153, 0.05));
       border: 1px solid rgba(16, 185, 129, 0.3);
@@ -452,6 +474,7 @@
       .buy-btn {
         padding: 0.8rem 1.2rem;
         font-size: 0.9rem;
+        text-align: center;
       }
 
       .guarantee-section {
@@ -513,11 +536,24 @@
     .testimonials-section {
       padding: var(--spacing-section) 0;
       margin: var(--spacing-section) 0;
+      overflow: visible;
+      height: auto;
     }
 
-    .faq-section {
-      padding: var(--spacing-section) 0;
-      margin: var(--spacing-section) 0;
+    .testimonials-section .row {
+      overflow: visible;
+      max-height: none;
+      height: auto;
+    }
+
+    .testimonials-section .col-lg-4 {
+      overflow: visible;
+      height: auto;
+    }
+
+    .testimonials-section .testimonial-card {
+      height: auto;
+      overflow: visible;
     }
 
     .legal-section {
@@ -645,6 +681,50 @@
 
     .row>.col-lg-4 .plan-card {
       width: 100%;
+    }
+
+    /* Footer image sizing */
+    .footer-brand img {
+      max-width: 120px;
+      height: auto;
+      max-height: 50px;
+    }
+
+    /* Download buttons styling */
+    .download-btn {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(79, 70, 229, 0.3);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      gap: 0.5rem;
+    }
+
+    .download-btn:hover {
+      border-color: #4f46e5;
+      background: rgba(79, 70, 229, 0.1);
+      color: #4f46e5;
+    }
+
+    .download-btn i {
+      font-size: 1.5rem;
+      color: #4f46e5;
+    }
+
+    .download-btn span {
+      font-weight: 500;
+    }
+
+    .download-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
     }
 
     /* Smooth scroll behavior */
@@ -1252,50 +1332,14 @@
       </p>
     </div>
   </section>
-
-  <!-- Final CTA -->
-  <section class="hero-section py-5">
-    <div class="container text-center" data-aos="fade-up">
-      <h2 class="display-5 fw-bold mb-4">
-        Pronto para Transformar Seus Resultados?
-      </h2>
-      <div class="row g-3 justify-content-center">
-        <div class="col-auto">
-          <a href="https://chk.eduzz.com/6W4VR2OY0Z" class="btn btn-secondary btn-lg" target="_blank" rel="noopener">
-            <i class="fas fa-play me-2"></i>
-            Começar - R$ 18,90/mês
-          </a>
-        </div>
-        <div class="col-auto">
-          <a href="https://chk.eduzz.com/Q9NDZ6VK01" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
-            <i class="fas fa-star me-2"></i>
-            Mais Popular - R$ 107,00/ano
-          </a>
-        </div>
-        <div class="col-auto">
-          <a href="https://chk.eduzz.com/797VARDAWE" class="btn btn-success btn-lg" target="_blank" rel="noopener">
-            <i class="fas fa-rocket me-2"></i>
-            Semestral - R$ 67,00
-          </a>
-        </div>
-      </div>
-
-      <div class="mt-4">
-        <small class="text-muted">
-          <i class="fas fa-lock me-1"></i>
-          Pagamento 100% seguro processado pela Eduzz
-        </small>
-      </div>
-    </div>
-  </section>
-
+ 
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="row g-4">
         <div class="col-lg-4">
           <div class="footer-brand">
-            <img src="../assets/images/logo_light.svg" alt="DasLoto" class="mb-3">
+            <img src="../assets/images/logo_dark_mark_lefth.svg" alt="DasLoto" class="mb-3">
             <p>Transformando resultados através da matemática e estatística aplicada às loterias.</p>
             <div class="social-links">
               <a href="https://www.facebook.com/dasloto" class="social-link" aria-label="Facebook">
@@ -1343,11 +1387,13 @@
         <div class="col-lg-2 col-md-6">
           <h6 class="footer-title">Download</h6>
           <div class="download-buttons">
-            <a href="#" class="download-btn">
-              <img src="../assets/images/google-play-badge.png" alt="Google Play" onerror="this.style.display='none'">
+            <a href="https://play.google.com/store/apps/details?id=com.dasloto" class="download-btn" target="_blank" rel="noopener">
+              <i class="fab fa-google-play me-2"></i>
+              <span>Google Play</span>
             </a>
-            <a href="#" class="download-btn">
-              <img src="../assets/images/app-store-badge.png" alt="App Store" onerror="this.style.display='none'">
+            <a href="https://apps.apple.com/br/app/dasloto/id6499999999" class="download-btn" target="_blank" rel="noopener">
+              <i class="fab fa-app-store me-2"></i>
+              <span>App Store</span>
             </a>
           </div>
         </div>
