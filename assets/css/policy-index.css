@@ -1,0 +1,265 @@
+/* ===========================================
+   CSS ESPECÍFICO PARA ÍNDICES DAS POLÍTICAS
+   =========================================== */
+
+/* Container principal do índice */
+.policy-index {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    backdrop-filter: blur(10px);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.policy-index::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa, #93c5fd);
+}
+
+/* Título do índice */
+.policy-index h3 {
+    color: #f1f5f9;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+}
+
+.policy-index h3 i {
+    color: #60a5fa;
+    font-size: 1.25rem;
+}
+
+.policy-index h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    border-radius: 2px;
+}
+
+/* Lista do índice */
+.policy-index ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.5rem;
+}
+
+.policy-index li {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.policy-index li:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+/* Links do índice */
+.policy-index a {
+    display: block;
+    color: #cbd5e1;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.875rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid transparent;
+}
+
+.policy-index a:hover {
+    color: #ffffff;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(96, 165, 250, 0.1) 100%);
+    border-color: rgba(96, 165, 250, 0.3);
+    text-shadow: 0 0 8px rgba(96, 165, 250, 0.3);
+    transform: translateX(8px);
+}
+
+.policy-index a:active {
+    transform: translateX(4px) scale(0.98);
+}
+
+/* Número das seções */
+.policy-index a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    transition: width 0.3s ease;
+    border-radius: 1px;
+}
+
+.policy-index a:hover::before {
+    width: 24px;
+}
+
+/* Indicador de seção ativa */
+.policy-index a.active {
+    color: #ffffff;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(96, 165, 250, 0.2) 100%);
+    border-color: rgba(96, 165, 250, 0.5);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+.policy-index a.active::before {
+    width: 24px;
+    background: linear-gradient(90deg, #60a5fa, #93c5fd);
+}
+
+/* Efeitos de foco para acessibilidade */
+.policy-index a:focus {
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
+}
+
+/* Animação de entrada */
+.policy-index[data-aos="fade-up"] {
+    animation: indexFadeIn 0.8s ease-out;
+}
+
+@keyframes indexFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .policy-index {
+        padding: 1.5rem;
+        margin: 0 -1rem 2rem -1rem;
+        border-radius: 12px;
+    }
+
+    .policy-index h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .policy-index ul {
+        gap: 0.25rem;
+    }
+
+    .policy-index a {
+        padding: 0.75rem 0.875rem;
+        font-size: 0.9rem;
+    }
+
+    .policy-index li:hover {
+        transform: translateX(2px);
+    }
+
+    .policy-index a:hover {
+        transform: translateX(4px);
+    }
+}
+
+@media (max-width: 480px) {
+    .policy-index {
+        padding: 1.25rem;
+        margin: 0 -0.5rem 1.5rem -0.5rem;
+    }
+
+    .policy-index h3 {
+        font-size: 1.125rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .policy-index a {
+        padding: 0.625rem 0.75rem;
+        font-size: 0.875rem;
+    }
+}
+
+/* Tema escuro adicional */
+@media (prefers-color-scheme: dark) {
+    .policy-index {
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.98) 100%);
+        border-color: rgba(96, 165, 250, 0.3);
+    }
+}
+
+/* Suporte para motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .policy-index li,
+    .policy-index a,
+    .policy-index a::before {
+        transition: none;
+    }
+
+    .policy-index li:hover {
+        transform: none;
+    }
+
+    .policy-index a:hover {
+        transform: none;
+    }
+
+    .policy-index[data-aos="fade-up"] {
+        animation: none;
+    }
+}
+
+/* Estilos para impressão */
+@media print {
+    .policy-index {
+        background: white !important;
+        border: 2px solid #e2e8f0 !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+    }
+
+    .policy-index h3 {
+        color: #1e293b !important;
+    }
+
+    .policy-index a {
+        color: #475569 !important;
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .policy-index a:hover {
+        background: transparent !important;
+        color: #475569 !important;
+        transform: none !important;
+    }
+}
