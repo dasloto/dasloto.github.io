@@ -669,9 +669,133 @@
     .separator {
       color: var(--text-muted);
       opacity: 0.5;
-      margin-top: 3rem;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      padding: 80px 0;
+      background: rgba(30, 41, 59, 0.2);
+    }
+
+    .faq-header {
+      margin-bottom: 2rem;
+    }
+
+    .faq-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--gradient-primary);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      color: white;
+    }
+
+    .faq-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .faq-stat {
       text-align: center;
+    }
+
+    .faq-stat .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      display: block;
+      line-height: 1;
+    }
+
+    .faq-stat .stat-label {
+      font-size: 0.9rem;
       color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .faq-accordion {
+      background: transparent;
+    }
+
+    .faq-item {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid var(--dark-border);
+      border-radius: 15px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .faq-item:hover {
+      border-color: var(--primary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(79, 70, 229, 0.2);
+    }
+
+    .faq-question {
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background: rgba(79, 70, 229, 0.1);
+    }
+
+    .faq-question h4 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+
+    .faq-toggle {
+      background: var(--gradient-primary);
+      border: none;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .faq-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .faq-toggle[aria-expanded="true"] {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      border-top: 1px solid var(--dark-border);
+    }
+
+    .faq-content {
+      padding: 1.5rem;
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .faq-content p {
+      margin: 0;
+      color: var(--text-muted);
+      line-height: 1.7;
     }
 
     /* Responsive */
@@ -771,6 +895,34 @@
         flex-direction: column;
         text-align: center;
         gap: 0.5rem;
+      }
+      
+      .faq-section {
+        padding: 60px 0;
+      }
+      
+      .faq-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+      }
+      
+      .faq-stats {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+      
+      .faq-question h4 {
+        font-size: 1rem;
+      }
+      
+      .faq-question {
+        padding: 1rem;
+      }
+      
+      .faq-content {
+        padding: 1rem;
       }
     }
   </style>
@@ -887,10 +1039,6 @@
           <p class="section-subtitle text-start">
             Conheça as principais ferramentas que são utilizadas dentro do DasLoto.
           </p>
-          <p class="text-muted mb-4">
-            Crie jogos assertivos com os fechamentos, desdobramentos, combinações e muito mais.
-          </p>
-          
           <div class="tool-card">
             <div class="tool-icon">
               <i class="fas fa-sync-alt"></i>
@@ -1053,26 +1201,130 @@
     </section>
 
     <!-- FAQ -->
-    <section class="section" id="faq" data-aos="fade-up">
-      <h2>Perguntas frequentes</h2>
-      <div class="faq">
-        <details>
-          <summary>O DasLoto realiza apostas com dinheiro real?</summary>
-          <p class="muted">Não. O DasLoto é uma plataforma de simulação e estudo. Não há transações monetárias nem vínculo com a Caixa.</p>
-        </details>
-        <details>
-          <summary>Como funcionam os “fechamentos”?</summary>
-          <p class="muted">São combinações matemáticas que reduzem o universo de jogos mantendo cobertura estatística para análise.</p>
-        </details>
-        <details>
-          <summary>Posso conferir com resultados oficiais?</summary>
-          <p class="muted">Sim. Você pode comparar suas simulações com resultados divulgados oficialmente.</p>
-        </details>
-        <details>
-          <summary>Existe versão web?</summary>
-          <p class="muted">Sim. Acesse <a href="https://app.dasloto.com" target="_blank" rel="noopener">app.dasloto.com</a>.</p>
-        </details>
-      </div>
+    <section class="faq-section" id="faq" data-aos="fade-up">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6" data-aos="fade-right">
+            <div class="faq-header">
+              <div class="faq-icon">
+                <i class="fas fa-question-circle"></i>
+              </div>
+              <h2 class="section-title text-start">Perguntas Frequentes</h2>
+              <p class="section-subtitle text-start">
+                Tire suas dúvidas sobre o DasLoto e descubra como aproveitar ao máximo nossos recursos.
+              </p>
+            </div>
+          </div>  
+          <div class="col-lg-6" data-aos="fade-left">
+            <div class="faq-accordion">
+              <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq1">
+                  <h4>
+                    <i class="fas fa-money-bill-wave text-danger me-2"></i>
+                    O DasLoto realiza apostas com dinheiro real?
+                  </h4>
+                  <button class="faq-toggle">
+                    <i class="fas fa-chevron-down"></i>
+                  </button>
+                </div>
+                <div id="faq1" class="faq-answer collapse">
+                  <div class="faq-content">
+                    <p>
+                      <strong>Não!</strong> O DasLoto é uma plataforma de simulação e estudo. 
+                      Não realizamos transações monetárias nem temos vínculo com a Caixa Econômica Federal. 
+                      É uma ferramenta educacional para análise estatística.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq2">
+                  <h4>
+                    <i class="fas fa-calculator text-primary me-2"></i>
+                    Como funcionam os "fechamentos"?
+                  </h4>
+                  <button class="faq-toggle">
+                    <i class="fas fa-chevron-down"></i>
+                  </button>
+                </div>
+                <div id="faq2" class="faq-answer collapse">
+                  <div class="faq-content">
+                    <p>
+                      Os fechamentos são <strong>combinações matemáticas inteligentes</strong> que reduzem o universo de jogos 
+                      mantendo cobertura estatística otimizada. Isso permite estudar padrões com menos jogos, 
+                      mantendo as chances proporcionais de análise.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq3">
+                  <h4>
+                    <i class="fas fa-check-circle text-success me-2"></i>
+                    Posso conferir com resultados oficiais?
+                  </h4>
+                  <button class="faq-toggle">
+                    <i class="fas fa-chevron-down"></i>
+                  </button>
+                </div>
+                <div id="faq3" class="faq-answer collapse">
+                  <div class="faq-content">
+                    <p>
+                      <strong>Sim!</strong> Você pode comparar suas simulações com os resultados oficiais 
+                      divulgados pela Caixa Econômica Federal. O app permite conferir acertos e 
+                      analisar a eficácia dos seus métodos de estudo.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                <div class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq4">
+                  <h4>
+                    <i class="fas fa-globe text-info me-2"></i>
+                    Existe versão web do aplicativo?
+                  </h4>
+                  <button class="faq-toggle">
+                    <i class="fas fa-chevron-down"></i>
+                  </button>
+                </div>
+                <div id="faq4" class="faq-answer collapse">
+                  <div class="faq-content">
+                    <p>
+                      <strong>Sim!</strong> Além do aplicativo Android, temos uma versão web completa. 
+                      Acesse <a href="https://app.dasloto.com" target="_blank" rel="noopener" class="text-primary fw-bold">app.dasloto.com</a> 
+                      e use todas as funcionalidades diretamente no seu navegador.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="faq-item" data-aos="fade-up" data-aos-delay="500">
+                <div class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq5">
+                  <h4>
+                    <i class="fas fa-chart-line text-warning me-2"></i>
+                    As análises garantem resultados?
+                  </h4>
+                  <button class="faq-toggle">
+                    <i class="fas fa-chevron-down"></i>
+                  </button>
+                </div>
+                <div id="faq5" class="faq-answer collapse">
+                  <div class="faq-content">
+                    <p>
+                      <strong>Não garantimos resultados.</strong> O DasLoto é uma ferramenta de estudo estatístico. 
+                      As loterias são jogos de sorte e nenhuma análise pode garantir acertos. 
+                      Use sempre com responsabilidade e para fins educacionais.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
     </section>
 
     <!-- CTA FINAL -->
@@ -1089,40 +1341,7 @@
       </div>
     </section>
 
-      <!-- LEGAL DISCLAIMER -->
-      <section class="legal-section" id="legal" data-aos="fade-up">
-        <div class="container">
-          <div class="legal-card">
-            <div class="legal-icon">
-              <i class="fas fa-shield-alt"></i>
-            </div>
-            <h3 class="legal-title">Isenção de Responsabilidade</h3>
-            <div class="legal-content">
-              <div class="legal-item">
-                <i class="fas fa-exclamation-triangle text-warning me-2"></i>
-                <strong>Sem vínculo oficial:</strong> O DasLoto não possui vínculo com a Caixa Econômica Federal ou loterias oficiais.
-              </div>
-              <div class="legal-item">
-                <i class="fas fa-info-circle text-info me-2"></i>
-                <strong>Fins educativos:</strong> Todas as informações, análises e simulações têm caráter estritamente informativo e educacional.
-              </div>
-              <div class="legal-item">
-                <i class="fas fa-ban text-danger me-2"></i>
-                <strong>Sem apostas reais:</strong> Este aplicativo não permite apostas com dinheiro real nem garante prêmios.
-              </div>
-              <div class="legal-item">
-                <i class="fas fa-check-circle text-success me-2"></i>
-                <strong>Validação oficial:</strong> Para apostas válidas, consulte sempre os canais oficiais da Caixa Econômica Federal.
-              </div>
-            </div>
-            <p class="legal-footer">
-              <i class="fas fa-gavel me-2"></i>
-              Ao usar o DasLoto, você concorda com estes termos e confirma que utiliza o aplicativo apenas para fins de estudo e entretenimento.
-            </p>
-          </div>
-        </div>
-      </section>
-
+    
     <!-- FOOTER -->
     <footer class="footer">
       <div class="container">
@@ -1134,10 +1353,6 @@
                 Aplicativo completo para análises e fechamentos de loterias. 
                 Desenvolva estratégias inteligentes com base em dados estatísticos.
               </p>
-              <div class="footer-disclaimer">
-                <i class="fas fa-shield-alt text-warning me-2"></i>
-                <small>Sem dinheiro real • Apenas para estudo</small>
-              </div>
             </div>
           </div>
           
@@ -1298,6 +1513,30 @@
       });
       observer.observe(statsSection);
     }
+
+    // FAQ toggle functionality
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', function() {
+        const toggle = this.querySelector('.faq-toggle');
+        const target = this.getAttribute('data-bs-target');
+        const answer = document.querySelector(target);
+        
+        // Rotate arrow icon
+        if (answer.classList.contains('show')) {
+          toggle.style.transform = 'rotate(0deg)';
+        } else {
+          // Close other FAQ items
+          document.querySelectorAll('.faq-answer.show').forEach(otherAnswer => {
+            if (otherAnswer !== answer) {
+              otherAnswer.classList.remove('show');
+              const otherToggle = otherAnswer.previousElementSibling.querySelector('.faq-toggle');
+              otherToggle.style.transform = 'rotate(0deg)';
+            }
+          });
+          toggle.style.transform = 'rotate(180deg)';
+        }
+      });
+    });
   </script>
 </body>
 </html>
