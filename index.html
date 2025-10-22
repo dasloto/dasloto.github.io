@@ -3,277 +3,1051 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DasLoto — Simulação & Análises de Loterias</title>
+  <title>DasLoto — O Melhor App para Análise de Loterias</title>
 
   <!-- SEO / Social -->
-  <meta name="description" content="Simule e analise resultados de loterias com fechamentos matemáticos, filtros e rankings. Sem dinheiro real. Estudo e comparação." />
-  <meta property="og:title" content="DasLoto — Simulação & Análises de Loterias" />
-  <meta property="og:description" content="150+ fechamentos matemáticos, filtros avançados, rankings e conferência com resultados oficiais. Sem apostas com dinheiro real." />
+  <meta name="description" content="Baixe o DasLoto e tenha acesso a fechamentos matemáticos, análises avançadas, ranking de usuários e muito mais. Aumente suas chances de sucesso!" />
+  <meta property="og:title" content="DasLoto — O Melhor App para Análise de Loterias" />
+  <meta property="og:description" content="Fechamentos matemáticos, análises completas, ranking de usuários e ferramentas exclusivas para melhorar seus jogos." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="assets/og-dasloto.png" />
   <meta property="og:url" content="https://www.dasloto.com/" />
 
   <!-- Fonts & Libs -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Tema base do seu site -->
+  <!-- Tema base -->
   <link href="./assets/css/dark-theme.css" rel="stylesheet" />
 
   <style>
-    :root{
-      --brand: var(--primary-color); /* herdado do seu tema */
-    }
-    body{
-      background: var(--bg-gradient-primary);
-      min-height:100vh;
-      color: var(--text-primary);
-    }
-    .container{
-      max-width:1160px;margin:0 auto;padding:96px 24px 48px;
-    }
-    .hero{
-      display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center;
-      padding-top:40px;
-    }
-    .pill{
-      display:inline-flex;align-items:center;gap:.5rem;
-      padding:.35rem .7rem;border:1px solid var(--border);border-radius:999px;
-      background: rgba(255,255,255,.04);font-weight:600;font-size:.85rem;
-    }
-    .hero h1{font-size:clamp(1.8rem,3.5vw,3rem);line-height:1.1;margin:.8rem 0;}
-    .hero p.lead{color:var(--text-secondary);font-size:1.05rem}
-    .cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.25rem}
-    .btn{
-      display:inline-flex;align-items:center;gap:.6rem;
-      padding:.85rem 1.1rem;border-radius:12px;border:1px solid var(--border);
-      background:var(--surface);text-decoration:none;color:var(--text-primary);font-weight:600;
-      transition:transform .08s ease, background .2s ease;
-    }
-    .btn.primary{background:var(--brand);color:#0b0b0b;border-color:transparent;}
-    .btn:hover{transform:translateY(-1px)}
-    .device{
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border:1px solid var(--border);border-radius:24px;padding:16px;aspect-ratio:9/16;
-      display:flex;align-items:center;justify-content:center;overflow:hidden;
-    }
-    .device img{width:100%;height:100%;object-fit:cover;border-radius:16px;opacity:.95}
-
-    .section{margin-top:72px}
-    .section h2{font-size:1.6rem;margin-bottom:1rem}
-    .muted{color:var(--text-secondary)}
-
-    .grid-3{
-      display:grid;gap:1rem;grid-template-columns:repeat(3,minmax(0,1fr));
-    }
-    .card{
-      background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px;
-    }
-    .card h3{font-size:1.05rem;margin:.4rem 0}
-    .card i{color:var(--brand)}
-
-    .how{
-      display:grid;gap:1rem;grid-template-columns:repeat(3,minmax(0,1fr));
-    }
-    .step{position:relative;padding:16px;border:1px dashed var(--border);border-radius:14px;background:rgba(255,255,255,.02)}
-    .step .num{
-      width:28px;height:28px;border-radius:999px;background:var(--brand);color:#0b0b0b;
-      display:inline-flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:.5rem;
+    :root {
+      --primary-color: #4f46e5;
+      --secondary-color: #7c3aed;
+      --success-color: #10b981;
+      --warning-color: #f59e0b;
+      --dark-bg: #0f172a;
+      --dark-surface: #1e293b;
+      --dark-border: #334155;
+      --text-light: #f8fafc;
+      --text-muted: #94a3b8;
+      --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     }
 
-    .features{
-      display:grid;gap:1rem;grid-template-columns:repeat(2,minmax(0,1fr));
-    }
-    .feature{
-      display:flex;gap:.9rem;align-items:flex-start;background:var(--surface);
-      border:1px solid var(--border);border-radius:16px;padding:16px;
-    }
-    .feature i{color:var(--brand);font-size:1.1rem;margin-top:.2rem}
-
-    .notice{
-      background: linear-gradient(135deg, rgba(245,158,11,.10), rgba(251,191,36,.08));
-      border-left:4px solid #f59e0b;border-radius:12px;padding:14px;margin-top:18px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    .faq{display:grid;gap:1rem;grid-template-columns:repeat(2,minmax(0,1fr))}
-    details{border:1px solid var(--border);border-radius:12px;padding:14px;background:var(--surface)}
-    summary{cursor:pointer;font-weight:600}
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--dark-bg);
+      color: var(--text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-    .footer{
-      display:grid;gap:1rem;grid-template-columns:repeat(4,minmax(0,1fr));
-      margin-top:48px;padding-top:24px;border-top:1px solid var(--border);
+    /* Header */
+    .navbar {
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--dark-border);
+      padding: 0.8rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
     }
-    .footer a{color:var(--text-secondary);text-decoration:none}
-    .footer a:hover{color:var(--text-primary)}
-    @media (max-width:1024px){
-      .hero{grid-template-columns:1fr}
-      .grid-3{grid-template-columns:1fr 1fr}
-      .how{grid-template-columns:1fr 1fr 1fr}
-      .features{grid-template-columns:1fr}
-      .footer{grid-template-columns:1fr 1fr}
+
+    .navbar-brand {
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: white !important;
+      text-decoration: none;
     }
-    @media (max-width:768px){
-      .grid-3{grid-template-columns:1fr}
-      .how{grid-template-columns:1fr}
-      .faq{grid-template-columns:1fr}
-      .container{padding-top:84px}
+
+    .navbar-brand img {
+      max-height: 32px;
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
+
+    .nav-link {
+      color: var(--text-light) !important;
+      font-weight: 500;
+      margin: 0 0.5rem;
+      padding: 0.5rem 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--primary-color) !important;
+      transform: translateY(-2px);
+    }
+
+    .navbar-toggler {
+      border: none;
+      padding: 0.25rem 0.5rem;
+    }
+
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+
+    @media (max-width: 991.98px) {
+      .navbar-collapse {
+        background: rgba(15, 23, 42, 0.98);
+        margin-top: 1rem;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+      
+      .navbar-nav .nav-link {
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin: 0;
+        text-align: center;
+      }
+      
+      .navbar-nav .nav-link:last-of-type {
+        border-bottom: none;
+      }
+      
+      .btn-download {
+        margin-top: 1rem !important;
+        margin-left: 0 !important;
+        display: block;
+        text-align: center;
+      }
+    }
+
+    .btn-download {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+    }
+
+    .btn-download:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+      color: white;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding: 100px 0 60px;
+      background: radial-gradient(ellipse at center, rgba(79, 70, 229, 0.1) 0%, transparent 70%);
+      position: relative;
+      overflow: hidden;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a"><stop offset="0" stop-color="%23667eea" stop-opacity="0.1"/><stop offset="1" stop-color="%23667eea" stop-opacity="0"/></radialGradient></defs><rect width="100%" height="100%" fill="url(%23a)"/></svg>');
+      pointer-events: none;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #f8fafc 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 8px 25px rgba(79, 70, 229, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(79, 70, 229, 0.4);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-light);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      border: 2px solid var(--dark-border);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-secondary:hover {
+      background: var(--dark-surface);
+      border-color: var(--primary-color);
+      transform: translateY(-3px);
+      color: var(--text-light);
+    }
+
+    .hero-image {
+      text-align: center;
+      position: relative;
+    }
+
+    .phone-mockup {
+      max-width: 300px;
+      height: auto;
+      border-radius: 30px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+      transition: transform 0.3s ease;
+    }
+
+    .phone-mockup:hover {
+      transform: perspective(1000px) rotateY(-2deg) rotateX(2deg) scale(1.02);
+    }
+
+    /* Features Section */
+    .features-section {
+      padding: 80px 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(30, 41, 59, 0.3) 100%);
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #f8fafc 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 4rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .feature-card {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid var(--dark-border);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      height: 100%;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary-color);
+      box-shadow: 0 20px 40px rgba(79, 70, 229, 0.2);
+    }
+
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--gradient-primary);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 2rem;
+      color: white;
+    }
+
+    .feature-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-light);
+    }
+
+    .feature-description {
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* Tools Section */
+    .tools-section {
+      padding: 80px 0;
+      background: rgba(30, 41, 59, 0.2);
+    }
+
+    .tool-card {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid var(--dark-border);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .tool-card:hover {
+      transform: translateX(10px);
+      border-color: var(--primary-color);
+      background: rgba(30, 41, 59, 0.9);
+    }
+
+    .tool-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-primary);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .tool-content h5 {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+    }
+
+    .tool-content p {
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      padding: 60px 0;
+      background: var(--gradient-primary);
+      text-align: center;
+    }
+
+    .stat-item {
+      text-align: center;
+      color: white;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 800;
+      display: block;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-top: 0.5rem;
+      opacity: 0.9;
+    }
+
+    /* Testimonials */
+    .testimonials-section {
+      padding: 100px 0;
+    }
+
+    .testimonial-card {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid var(--dark-border);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      height: 100%;
+      backdrop-filter: blur(10px);
+    }
+
+    .testimonial-avatar {
+      width: 80px;
+      height: 80px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    .testimonial-name {
+      font-weight: 700;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .testimonial-text {
+      color: var(--text-muted);
+      font-style: italic;
+      line-height: 1.8;
+    }
+
+    .stars {
+      color: #fbbf24;
+      margin-bottom: 1rem;
+    }
+
+    /* Legal Section */
+    .legal-section {
+      padding: 60px 0;
+      background: rgba(79, 70, 229, 0.05);
+      border-top: 1px solid rgba(79, 70, 229, 0.2);
+    }
+
+    .legal-card {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid var(--dark-border);
+      border-radius: 20px;
+      padding: 3rem;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .legal-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 2rem;
+      color: white;
+    }
+
+    .legal-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: var(--text-light);
+    }
+
+    .legal-content {
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .legal-item {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--dark-border);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .legal-item:hover {
+      border-color: var(--primary-color);
+      transform: translateX(5px);
+    }
+
+    .legal-footer {
+      background: rgba(79, 70, 229, 0.1);
+      border: 1px solid var(--primary-color);
+      border-radius: 10px;
+      padding: 1rem;
+      font-weight: 500;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    /* Footer */
+    .footer {
+      background: linear-gradient(180deg, var(--dark-surface) 0%, #0f1419 100%);
+      border-top: 1px solid var(--dark-border);
+      padding: 60px 0 0;
+    }
+
+    .footer-brand {
+      margin-bottom: 2rem;
+    }
+
+    .footer-logo-img {
+      height: 40px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      margin-bottom: 1rem;
+    }
+
+    .footer-description {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .footer-disclaimer {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      color: #fbbf24;
+    }
+
+    .footer-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      font-size: 0.95rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-color);
+      transform: translateX(3px);
+    }
+
+    .download-links {
+      margin-bottom: 1.5rem;
+    }
+
+    .download-btn {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid var(--dark-border);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .download-btn:hover {
+      border-color: var(--primary-color);
+      background: rgba(79, 70, 229, 0.1);
+      transform: translateY(-2px);
+      color: var(--text-light);
+    }
+
+    .download-btn i {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+    }
+
+    .download-btn small {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+    }
+
+    .social-link:hover {
+      transform: translateY(-3px);
+      color: white;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--dark-border);
+      padding: 2rem 0;
+      margin-top: 3rem;
+    }
+
+    .copyright {
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .footer-legal-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      justify-content: end;
+    }
+
+    .footer-legal-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-legal-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .separator {
+      color: var(--text-muted);
+      opacity: 0.5;
+      margin-top: 3rem;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 80px 0 40px;
+        min-height: 70vh;
+      }
+      
+      .hero-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .hero-cta {
+        flex-direction: column;
+        align-items: stretch;
+        margin-bottom: 2rem;
+      }
+      
+      .btn-primary, .btn-secondary {
+        text-align: center;
+        justify-content: center;
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+        margin-bottom: 0.8rem;
+      }
+      
+      .section-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 3rem;
+      }
+      
+      .features-section,
+      .tools-section {
+        padding: 60px 0;
+      }
+      
+      .stats-section {
+        padding: 40px 0;
+      }
+      
+      .feature-card {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .feature-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+      }
+      
+      .tool-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.2rem;
+      }
+      
+      .tool-icon {
+        margin: 0 auto 1rem;
+      }
+      
+      .stat-number {
+        font-size: 2rem;
+      }
+      
+      .legal-card {
+        padding: 2rem 1.5rem;
+      }
+      
+      .legal-title {
+        font-size: 1.5rem;
+      }
+      
+      .legal-item {
+        flex-direction: column;
+        text-align: left;
+        gap: 0.5rem;
+      }
+      
+      .footer-legal-links {
+        justify-content: center;
+        margin-top: 1rem;
+      }
+      
+      .download-btn {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+      }
     }
   </style>
 </head>
 <body>
-  <header class="container" style="padding-top:32px;padding-bottom:0">
-    <nav style="display:flex;justify-content:space-between;align-items:center;gap:1rem;">
-      <a href="#" class="pill"><i class="fa-solid fa-dice"></i> <span>DasLoto</span></a>
-      <div style="display:flex;gap:.5rem;flex-wrap:wrap">
-        <a class="btn" href="#recursos">Recursos</a>
-        <a class="btn" href="#como-funciona">Como funciona</a>
-        <a class="btn" href="#faq">FAQ</a>
-        <a class="btn primary" href="https://play.google.com/store/apps/details?id=dev.franciscocarlos.dasloto&hl=gsw" target="_blank" rel="noopener">
-          <i class="fa-brands fa-google-play"></i> Baixar na Play Store
-        </a>
-      </div>
-    </nav>
-  </header>
-
-  <main class="container">
-    <!-- HERO -->
-    <section class="hero" data-aos="fade-up">
-      <div>
-        <span class="pill"><i class="fa-solid fa-flask"></i> Estudos e simulações</span>
-        <h1>Simule, analise e compare — sem dinheiro real.</h1>
-        <p class="lead">
-          Explore <strong>150+ fechamentos matemáticos</strong>, filtros e estatísticas para estudar padrões
-          e conferir com resultados oficiais — tudo em um só lugar. :contentReference[oaicite:1]{index=1}
-        </p>
-        <div class="cta">
-          <a class="btn primary" href="https://play.google.com/store/apps/details?id=dev.franciscocarlos.dasloto&hl=gsw" target="_blank" rel="noopener">
-            <i class="fa-brands fa-google-play"></i> Instalar agora
-          </a>
-          <a class="btn" href="https://app.dasloto.com" target="_blank" rel="noopener">
-            <i class="fa-solid fa-globe"></i> Usar versão web
-          </a>
-          <a class="btn" href="policies.html">
-            <i class="fa-solid fa-shield-halved"></i> Políticas
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="assets/images/logo_dark_wordmark.svg" alt="DasLoto" style="height: 32px; filter: brightness(0) invert(1);">
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars text-white"></i>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="navbar-nav ms-auto align-items-center">
+          <a class="nav-link" href="#recursos">Recursos</a>
+          <a class="nav-link" href="#ferramentas">Ferramentas</a>
+          <a class="nav-link" href="#avaliacoes">Avaliações</a>
+          <a class="nav-link" href="#contato">Contato</a>
+          <a class="btn-download ms-3" href="https://play.google.com/store/apps/details?id=dev.franciscocarlos.dasloto&hl=pt" target="_blank">
+            <i class="fab fa-google-play me-2"></i> Baixar App
           </a>
         </div>
-        <div class="muted" style="margin-top:.8rem">Sem vínculo com a Caixa. Não há apostas com dinheiro real.</div>
       </div>
-      <div>
-        <div class="device" aria-label="Prévia do aplicativo">
-          <!-- coloque um print real do app em assets/hero-preview.png -->
-          <img src="assets/hero-preview.png" alt="Tela do DasLoto" />
-        </div>
-      </div>
-    </section>
+    </div>
+  </nav>
 
-    <!-- BENEFÍCIOS (3 colunas) -->
-    <section class="section" id="beneficios" data-aos="fade-up">
-      <div class="grid-3">
-        <div class="card">
-          <i class="fa-solid fa-wand-magic-sparkles"></i>
-          <h3>Fechamentos matemáticos</h3>
-          <p class="muted">Apoie seus estudos em combinações otimizadas e reduza o universo de possibilidades.</p>
-        </div>
-        <div class="card">
-          <i class="fa-solid fa-filter"></i>
-          <h3>Filtros & estatísticas</h3>
-          <p class="muted">Pares/ímpares, colunas, ciclos, repetidas, primos, soma e mais — visualize padrões.</p>
-        </div>
-        <div class="card">
-          <i class="fa-solid fa-trophy"></i>
-          <h3>Ranking da comunidade</h3>
-          <p class="muted">Compare desempenho de palpites e evolua com insights do ranking.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- RECURSOS (lista) -->
-    <section class="section" id="recursos" data-aos="fade-up">
-      <h2>Recursos que você encontra no DasLoto</h2>
-      <div class="features">
-        <div class="feature">
-          <i class="fa-solid fa-lightbulb"></i>
-          <div>
-            <strong>Criação de palpites</strong>
-            <div class="muted">Monte palpites a partir de regras, exclusões e fixações de dezenas.</div>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6" data-aos="fade-right">
+          <h1 class="hero-title">Baixe o DasLoto</h1>
+          <p class="hero-subtitle">
+            O aplicativo completo com diversas estatísticas e análises para melhorar suas chances de sucesso nos jogos. 
+            Tenha tudo o que precisa para criar jogos inteligentes e estratégicos.
+          </p>
+          <div class="hero-cta">
+            <a href="https://play.google.com/store/apps/details?id=dev.franciscocarlos.dasloto&hl=pt" target="_blank" class="btn-primary">
+              <i class="fab fa-google-play"></i> Disponível em Google Play
+            </a>
+            <a href="https://app.dasloto.com" target="_blank" class="btn-secondary">
+              <i class="fas fa-globe"></i> Versão Web
+            </a>
           </div>
+          <p class="text-muted small">
+            <i class="fas fa-shield-alt me-2"></i>
+            Sem vínculo com a Caixa Econômica Federal. Não há apostas com dinheiro real.
+          </p>
         </div>
-        <div class="feature">
-          <i class="fa-solid fa-list-check"></i>
-          <div>
-            <strong>Simulações de jogos</strong>
-            <div class="muted">Teste cenários e entenda impactos por faixa de acertos.</div>
-          </div>
-        </div>
-        <div class="feature">
-          <i class="fa-solid fa-check-circle"></i>
-          <div>
-            <strong>Conferência com resultados</strong>
-            <div class="muted">Valide suas simulações com resultados oficiais divulgados.</div>
-          </div>
-        </div>
-        <div class="feature">
-          <i class="fa-solid fa-bolt"></i>
-          <div>
-            <strong>Performance</strong>
-            <div class="muted">Geração rápida de combinações e análises, mesmo em grandes volumes.</div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="hero-image">
+            <img src="assets/images/screenshot1.png" alt="DasLoto App" class="phone-mockup img-fluid">
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="notice">
-        <strong>Importante:</strong> As premiações exibidas são <em>simulações</em> para estudo e comparação.
-        Valide jogos apenas pelos canais oficiais. O app <strong>não permite apostas com dinheiro real</strong>.
+  <!-- Features Section -->
+  <section class="features-section" id="recursos">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Principais Recursos</h2>
+      <p class="section-subtitle" data-aos="fade-up">
+        Descubra as ferramentas que fazem do DasLoto o melhor aplicativo para análise de loterias
+      </p>
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-calculator"></i>
+            </div>
+            <h3 class="feature-title">Fechamentos</h3>
+            <p class="feature-description">
+              Aumente suas chances de vitória com nossos fechamentos matematicamente otimizados.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3 class="feature-title">Análises</h3>
+            <p class="feature-description">
+              Compreenda os padrões e tendências das loterias para melhorar suas decisões de jogo.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <h3 class="feature-title">Ranking</h3>
+            <p class="feature-description">
+              Desafie outros jogadores postando seus palpites e veja quem alcança os melhores resultados.
+            </p>
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- COMO FUNCIONA (3 passos) -->
-    <section class="section" id="como-funciona" data-aos="fade-up">
-      <h2>Como funciona</h2>
-      <div class="how">
-        <div class="step">
-          <div class="num">1</div>
-          <h3>Escolha filtros</h3>
-          <p class="muted">Defina critérios (fixar, excluir, pares/ímpares, etc.).</p>
+  <!-- Tools Section -->
+  <section class="tools-section" id="ferramentas">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6" data-aos="fade-right">
+          <h2 class="section-title text-start">Principais Ferramentas</h2>
+          <p class="section-subtitle text-start">
+            Conheça as principais ferramentas que são utilizadas dentro do DasLoto.
+          </p>
+          <p class="text-muted mb-4">
+            Crie jogos assertivos com os fechamentos, desdobramentos, combinações e muito mais.
+          </p>
+          
+          <div class="tool-card">
+            <div class="tool-icon">
+              <i class="fas fa-sync-alt"></i>
+            </div>
+            <div class="tool-content">
+              <h5>Dezenas Repetidas</h5>
+              <p>Quer saber quantas dezenas se repetem ao longo dos sorteios, essa ferramenta é a solução.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="tool-content">
+              <h5>Ranking de Usuários</h5>
+              <p>Participe de um ranking de usuários onde você pode palpitar e verificar suas pontuações diáriamente.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">
+              <i class="fas fa-thermometer-half"></i>
+            </div>
+            <div class="tool-content">
+              <h5>Temperatura das Dezenas</h5>
+              <p>Saiba quando uma dezena está quente e saindo muito ou quando ela está fria e ausente nos sorteios.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="tool-content">
+              <h5>Análise dos Ciclos</h5>
+              <p>Veja quais números estão ausentes e faltantes para completar o ciclo e utilize em seus jogos.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">
+              <i class="fas fa-bell"></i>
+            </div>
+            <div class="tool-content">
+              <h5>Resultados Atualizados</h5>
+              <p>Tenha resultados sempre atualizados e em primeira mão, você confere seus jogos primeiro que os outros.</p>
+            </div>
+          </div>
         </div>
-        <div class="step">
-          <div class="num">2</div>
-          <h3>Gere simulações</h3>
-          <p class="muted">Crie combinações com base em fechamentos matemáticos.</p>
-        </div>
-        <div class="step">
-          <div class="num">3</div>
-          <h3>Confira & compare</h3>
-          <p class="muted">Compare com resultados oficiais e acompanhe no ranking.</p>
+        
+        <div class="col-lg-6 d-flex align-items-center" data-aos="fade-left">
+          <div class="text-center w-100">
+            <img src="assets/images/screenshot1.png" alt="DasLoto Features" class="img-fluid" style="max-width: 300px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- PROVAS SOCIAIS (placeholders) -->
-    <section class="section" data-aos="fade-up">
-      <h2>O que dizem nossos usuários</h2>
-      <div class="grid-3">
-        <div class="card">
-          <div style="display:flex;align-items:center;gap:.5rem">
-            <img src="assets/avatar1.png" alt="Usuário A" width="40" height="40" style="border-radius:50%">
-            <div><strong>Marcos</strong><div class="muted">Estudos em Lotofácil</div></div>
-          </div>
-          <p class="muted" style="margin-top:.6rem">“Ferramentas completas para estudar padrões. Curti o ranking.”</p>
+  <!-- Stats Section -->
+  <section class="stats-section" data-aos="fade-up">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-lg-12 mb-5">
+          <h2 class="text-white mb-3">Nossos Números</h2>
+          <p class="text-white-50 fs-5">
+            A cada dia nossa comunidade vem crescendo e aproveitando todas as vantagens de ser membro do DasLoto.
+          </p>
         </div>
-        <div class="card">
-          <div style="display:flex;align-items:center;gap:.5rem">
-            <img src="assets/avatar2.png" alt="Usuário B" width="40" height="40" style="border-radius:50%">
-            <div><strong>Ana</strong><div class="muted">Simulações</div></div>
+      </div>
+      <div class="row g-4">
+        <div class="col-6 col-md-3">
+          <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+            <span class="stat-number">+25.000</span>
+            <div class="stat-label">Palpites</div>
           </div>
-          <p class="muted" style="margin-top:.6rem">“Fechamentos e filtros salvaram um bom tempo do meu estudo.”</p>
         </div>
-        <div class="card">
-          <div style="display:flex;align-items:center;gap:.5rem">
-            <img src="assets/avatar3.png" alt="Usuário C" width="40" height="40" style="border-radius:50%">
-            <div><strong>Lucas</strong><div class="muted">Comparações</div></div>
+        <div class="col-6 col-md-3">
+          <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+            <span class="stat-number">+60K</span>
+            <div class="stat-label">Membros</div>
           </div>
-          <p class="muted" style="margin-top:.6rem">“Curti a conferência com resultados e a velocidade.”</p>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+            <span class="stat-number">+300</span>
+            <div class="stat-label">Fechamentos</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+            <span class="stat-number">+1.800</span>
+            <div class="stat-label">Avaliações</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section" id="avaliacoes">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Avaliações de Membros</h2>
+      <p class="section-subtitle" data-aos="fade-up">
+        Veja o que os membros do aplicativo estão falando sobre o DasLoto nas Lojas de Apps.
+      </p>
+      <div class="row g-4">
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="testimonial-card">
+            <div class="testimonial-avatar">JM</div>
+            <div class="stars mb-3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <h5 class="testimonial-name">João Marcos</h5>
+            <p class="testimonial-text">
+              "O app cobre muitos pontos de análise. Usava planilhas pra simular, mas o app me atende muito mais. 
+              Só uma resalva: Nas estatísticas de jogos salvos, não leva em consideração que os prêmios se multiplicam."
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="testimonial-card">
+            <div class="testimonial-avatar">SP</div>
+            <div class="stars mb-3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <h5 class="testimonial-name">Sheila de Paula</h5>
+            <p class="testimonial-text">
+              "Olha eu testei o desdobramento do app e me surpreendeu. Gerou 11 jogos e veio 2 com 13 pontos e 2 com 11 pontos. 
+              Meus parabéns aos desenvolvedores, eu recomendo! 👏👏👏"
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="testimonial-card">
+            <div class="testimonial-avatar">VS</div>
+            <div class="stars mb-3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <h5 class="testimonial-name">Vlagnor Santis</h5>
+            <p class="testimonial-text">
+              "Show de bola ⭐⭐⭐⭐⭐ Aplicativo muito bom para análises de loterias. Recomendo para todos que querem melhorar seus jogos!"
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -306,7 +1080,7 @@
       <h2>Pronto para estudar com mais recursos?</h2>
       <p class="muted">Instale agora e comece a simular combinações com poucos toques.</p>
       <div class="cta" style="justify-content:center">
-        <a class="btn primary" href="https://play.google.com/store/apps/details?id=dev.franciscocarlos.dasloto&hl=gsw" target="_blank" rel="noopener">
+        <a class="btn primary" href="https://play.google.com/store/apps/details?id=dev.franciscocarlos.dasloto&hl=pt" target="_blank" rel="noopener">
           <i class="fa-brands fa-google-play"></i> Baixar na Play Store
         </a>
         <a class="btn" href="https://app.dasloto.com" target="_blank" rel="noopener">
@@ -315,71 +1089,215 @@
       </div>
     </section>
 
-    <!-- LEGAL -->
-    <section class="section" data-aos="fade-up">
-      <div class="card">
-        <h3><i class="fa-solid fa-scale-balanced" style="color:var(--brand)"></i> Isenção & responsabilidade</h3>
-        <p class="muted">
-          O DasLoto <strong>não possui vínculo com a Loteria Oficial da Caixa Econômica Federal</strong>. As informações e simulações têm caráter
-          <strong>estritamente informativo</strong> e não substituem a conferência oficial. Para ter validade, o jogador deve validar sempre pelas
-          loterias oficiais.
-        </p>
-      </div>
-    </section>
+      <!-- LEGAL DISCLAIMER -->
+      <section class="legal-section" id="legal" data-aos="fade-up">
+        <div class="container">
+          <div class="legal-card">
+            <div class="legal-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3 class="legal-title">Isenção de Responsabilidade</h3>
+            <div class="legal-content">
+              <div class="legal-item">
+                <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                <strong>Sem vínculo oficial:</strong> O DasLoto não possui vínculo com a Caixa Econômica Federal ou loterias oficiais.
+              </div>
+              <div class="legal-item">
+                <i class="fas fa-info-circle text-info me-2"></i>
+                <strong>Fins educativos:</strong> Todas as informações, análises e simulações têm caráter estritamente informativo e educacional.
+              </div>
+              <div class="legal-item">
+                <i class="fas fa-ban text-danger me-2"></i>
+                <strong>Sem apostas reais:</strong> Este aplicativo não permite apostas com dinheiro real nem garante prêmios.
+              </div>
+              <div class="legal-item">
+                <i class="fas fa-check-circle text-success me-2"></i>
+                <strong>Validação oficial:</strong> Para apostas válidas, consulte sempre os canais oficiais da Caixa Econômica Federal.
+              </div>
+            </div>
+            <p class="legal-footer">
+              <i class="fas fa-gavel me-2"></i>
+              Ao usar o DasLoto, você concorda com estes termos e confirma que utiliza o aplicativo apenas para fins de estudo e entretenimento.
+            </p>
+          </div>
+        </div>
+      </section>
 
     <!-- FOOTER -->
     <footer class="footer">
-      <div>
-        <strong>DasLoto</strong>
-        <p class="muted">Fechamentos & análises para estudo — sem dinheiro real.</p>
-      </div>
-      <div>
-        <strong>Links</strong>
-        <ul style="list-style:none;padding:0;margin:0">
-          <li><a href="policies.html">Política de Privacidade</a></li>
-          <li><a href="excluir-dados-dasloto.html">Exclusão de Dados</a></li>
-          <li><a href="status-dasloto.html">Status & Manutenção</a></li>
-          <li><a href="sobre-dasloto.html">Sobre</a></li>
-        </ul>
-      </div>
-      <div>
-        <strong>Contato</strong>
-        <ul style="list-style:none;padding:0;margin:0">
-          <li><a href="mailto:ajuda@dasloto.com">ajuda@dasloto.com</a></li>
-        </ul>
-      </div>
-      <div>
-        <strong>Disponível em</strong>
-        <p><a href="https://play.google.com/store/apps/details?id=dev.franciscocarlos.dasloto&hl=gsw" target="_blank" rel="noopener">Google Play</a></p>
-        <p><a href="https://app.dasloto.com" target="_blank" rel="noopener">Versão Web</a></p>
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-brand">
+              <img src="assets/images/logo_dark_mark_lefth.svg" alt="DasLoto" class="footer-logo-img">
+              <p class="footer-description">
+                Aplicativo completo para análises e fechamentos de loterias. 
+                Desenvolva estratégias inteligentes com base em dados estatísticos.
+              </p>
+              <div class="footer-disclaimer">
+                <i class="fas fa-shield-alt text-warning me-2"></i>
+                <small>Sem dinheiro real • Apenas para estudo</small>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-2 col-md-6">
+            <h5 class="footer-title">Produto</h5>
+            <ul class="footer-links">
+              <li><a href="#recursos"><i class="fas fa-cog me-2"></i>Recursos</a></li>
+              <li><a href="#ferramentas"><i class="fas fa-tools me-2"></i>Ferramentas</a></li>
+              <li><a href="projects/plans.html"><i class="fas fa-star me-2"></i>Planos</a></li>
+              <li><a href="#avaliacoes"><i class="fas fa-comments me-2"></i>Avaliações</a></li>
+            </ul>
+          </div>
+          
+          <div class="col-lg-2 col-md-6">
+            <h5 class="footer-title">Suporte</h5>
+            <ul class="footer-links">
+              <li><a href="projects/about.html"><i class="fas fa-info-circle me-2"></i>Sobre Nós</a></li>
+              <li><a href="mailto:ajuda@dasloto.com"><i class="fas fa-envelope me-2"></i>Contato</a></li>
+              <li><a href="projects/policies.html"><i class="fas fa-shield-alt me-2"></i>Privacidade</a></li>
+              <li><a href="projects/delete-account.html"><i class="fas fa-user-times me-2"></i>Excluir Conta</a></li>
+            </ul>
+          </div>
+          
+          <div class="col-lg-4 col-md-6">
+            <h5 class="footer-title">Baixar Agora</h5>
+            <div class="download-links">
+              <a href="https://play.google.com/store/apps/details?id=dev.franciscocarlos.dasloto&hl=pt" target="_blank" rel="noopener" class="download-btn">
+                <i class="fab fa-google-play"></i>
+                <div>
+                  <small>Disponível no</small>
+                  <strong>Google Play</strong>
+                </div>
+              </a>
+              <a href="https://app.dasloto.com" target="_blank" rel="noopener" class="download-btn">
+                <i class="fas fa-globe"></i>
+                <div>
+                  <small>Acesse a</small>
+                  <strong>Versão Web</strong>
+                </div>
+              </a>
+            </div>
+            
+            <div class="social-links">
+              <a href="mailto:ajuda@dasloto.com" class="social-link" aria-label="Email">
+                <i class="fas fa-envelope"></i>
+              </a>
+              <a href="https://app.dasloto.com" class="social-link" aria-label="Site">
+                <i class="fas fa-globe"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <p class="copyright">
+                © <span id="year"></span> DasLoto. Todos os direitos reservados.
+              </p>
+            </div>
+            <div class="col-md-6 text-md-end">
+              <div class="footer-legal-links">
+                <a href="projects/policies.html">Termos de Uso</a>
+                <span class="separator">•</span>
+                <a href="projects/policies.html">Privacidade</a>
+                <span class="separator">•</span>
+                <a href="projects/manutenance.html">Status</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
-
-    <div style="text-align:center;margin-top:16px" class="muted">
-      © <span id="year"></span> DasLoto — Todos os direitos reservados.
-    </div>
-  </main>
-
   <!-- Back to top -->
   <a href="#" class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
     <i class="fas fa-arrow-up"></i>
   </a>
 
   <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init({ duration: 900, once: true });
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+    });
+
+    // Update year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    const backToTopButton = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) backToTopButton.classList.add('show');
-      else backToTopButton.classList.remove('show');
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 100) {
+        navbar.style.background = 'rgba(15, 23, 42, 0.98)';
+        navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
+      } else {
+        navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+        navbar.style.boxShadow = 'none';
+      }
     });
-    backToTopButton.addEventListener('click', e => {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offsetTop = target.offsetTop - 80;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
     });
+
+    // Counter animation for stats
+    const animateCounters = () => {
+      const counters = document.querySelectorAll('.stat-number');
+      counters.forEach(counter => {
+        const target = parseInt(counter.textContent.replace(/[^\d]/g, ''));
+        const increment = target / 100;
+        let current = 0;
+        
+        const updateCounter = () => {
+          if (current < target) {
+            current += increment;
+            if (counter.textContent.includes('K')) {
+              counter.textContent = '+' + Math.ceil(current / 1000) + 'K';
+            } else {
+              counter.textContent = '+' + Math.ceil(current);
+            }
+            requestAnimationFrame(updateCounter);
+          } else {
+            counter.textContent = counter.dataset.original || counter.textContent;
+          }
+        };
+        
+        // Store original text
+        counter.dataset.original = counter.textContent;
+        updateCounter();
+      });
+    };
+
+    // Trigger counter animation when stats section is visible
+    const statsSection = document.querySelector('.stats-section');
+    if (statsSection) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounters();
+            observer.unobserve(entry.target);
+          }
+        });
+      });
+      observer.observe(statsSection);
+    }
   </script>
 </body>
 </html>

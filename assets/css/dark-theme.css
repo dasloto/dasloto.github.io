@@ -16,6 +16,10 @@
     --text-muted: #94a3b8;
     --text-accent: #4f46e5;
     
+    /* Link Colors */
+    --link-primary: #60a5fa;
+    --link-hover: #93c5fd;
+    
     /* Border Colors */
     --border-primary: #3a3a3a;
     --border-secondary: #4a4a4a;
@@ -330,6 +334,27 @@ body {
     color: var(--text-secondary);
 }
 
+/* Links styles - fix for better readability */
+a {
+    color: var(--link-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+.section a {
+    color: var(--link-primary);
+    font-weight: 500;
+}
+
+.section a:hover {
+    color: var(--link-hover);
+}
+
 /* Common Highlight Boxes */
 .highlight-box {
     background: var(--bg-tertiary);
@@ -383,6 +408,15 @@ body {
     color: var(--text-primary);
 }
 
+.contact-section a {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+}
+
+.contact-section a:hover {
+    color: #ffffff;
+}
+
 .contact-button {
     display: inline-block;
     background: rgba(255, 255, 255, 0.2);
@@ -400,6 +434,7 @@ body {
     background: rgba(255, 255, 255, 0.3);
     transform: translateY(-2px);
     box-shadow: var(--shadow-primary);
+    color: var(--text-primary);
 }
 
 /* Common Button Styles */
@@ -492,14 +527,14 @@ body {
 }
 
 .policy-nav a {
-    color: var(--accent-primary);
+    color: #60a5fa;
     text-decoration: none;
     font-weight: 500;
     transition: color var(--transition-normal);
 }
 
 .policy-nav a:hover {
-    color: var(--accent-secondary);
+    color: #93c5fd;
 }
 
 /* Forms */
