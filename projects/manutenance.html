@@ -3,344 +3,226 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Status & Manutenção - DasLoto</title>
+  <title>Status & Manutenção - Dasloto</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Verifique o status dos serviços do Dasloto e informações sobre manutenções programadas.">
 
   <!-- CSS Externos -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <link href="../../assets/css/dark-theme.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <style>
-    body{
-      background: var(--bg-gradient-primary);
-      min-height:100vh;
-      padding-top:100px;
-    }
-    .content-wrapper{ padding:40px 30px; }
-    .section{ margin-bottom: var(--spacing-8); }
+  <!-- Tema base -->
+  <link href="../assets/css/dark-theme.css" rel="stylesheet" />
+  
+  <!-- Main Styles -->
+  <link href="../assets/css/main-style.css" rel="stylesheet" />
 
-    /* Banner de status */
-    .status-banner{
-      display:flex;gap:1rem;align-items:center;
-      background: var(--surface);
-      border:1px solid var(--border);
-      border-radius: var(--border-radius);
-      padding:1.25rem;
-    }
-    .status-indicator{
-      width:14px;height:14px;border-radius:50%;
-      box-shadow:0 0 0 4px rgba(0,0,0,.05) inset;
-    }
-    .status-ok{ background:#10b981; }
-    .status-warn{ background:#f59e0b; }
-    .status-down{ background:#ef4444; }
-
-    .badge{
-      display:inline-flex;align-items:center;gap:.4rem;
-      border-radius:999px;
-      padding:.35rem .65rem;
-      font-size:.8rem;font-weight:600;
-      border:1px solid var(--border);
-      background: var(--surface-2, rgba(255,255,255,.03));
-    }
-    .badge i{ font-size:.85rem; }
-
-    /* Cards e listas */
-    .grid{
-      display:grid;gap:1rem;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-    }
-    .card{
-      background: var(--surface);
-      border:1px solid var(--border);
-      border-radius: var(--border-radius);
-      padding:1.25rem;
-    }
-    .card + .card{ margin-top:0; }
-    .card h3{ margin-bottom:.5rem; }
-
-    .kvs{ display:flex;flex-wrap:wrap;gap:.5rem 1rem; }
-    .kvs-item{ display:flex;align-items:center;gap:.5rem; }
-    .kvs-item i{ color:var(--primary-color); }
-
-    /* Progresso */
-    .progress{
-      height:10px;border-radius:999px;background:rgba(255,255,255,.08);
-      overflow:hidden;border:1px solid var(--border);
-    }
-    .progress > span{
-      display:block;height:100%;width:0%;
-      background: linear-gradient(90deg, var(--primary-color), rgba(99,102,241,.8));
-      transition:width .4s ease;
-    }
-
-    .list{
-      display:flex;flex-direction:column;gap:.75rem;margin-top:.75rem;
-    }
-    .list-item{
-      display:flex;align-items:flex-start;gap:.75rem;
-      padding:.75rem;border:1px dashed var(--border);
-      border-radius: var(--border-radius);
-      background: rgba(255,255,255,.02);
-    }
-    .list-item i{ color:var(--primary-color); margin-top:.15rem; }
-
-    /* Componentes */
-    .component{
-      display:flex;justify-content:space-between;align-items:center;
-      padding:.75rem;border:1px solid var(--border);
-      border-radius: var(--border-radius);background:var(--surface);
-    }
-    .component .title{ display:flex;align-items:center;gap:.5rem;font-weight:600; }
-    .component .state{ font-weight:600; }
-
-    .state-ok{ color:#10b981; }
-    .state-partial{ color:#f59e0b; }
-    .state-down{ color:#ef4444; }
-
-    /* Timeline */
-    .timeline{
-      position:relative;margin-top:1rem;padding-left:1rem;
-    }
-    .timeline::before{
-      content:"";position:absolute;left:4px;top:0;bottom:0;width:2px;background:var(--border);
-    }
-    .tl-item{
-      position:relative;margin-left:1rem;padding-left:1rem;margin-bottom:1rem;
-    }
-    .tl-item::before{
-      content:"";position:absolute;left:-13px;top:.25rem;width:10px;height:10px;border-radius:50%;
-      background: var(--primary-color);border:2px solid var(--surface);
-    }
-    .muted{ color: var(--text-secondary); }
-
-    /* Avisos */
-    .highlight-box, .info-box, .warn-box{
-      border-radius: var(--border-radius);
-      padding:1rem;margin-top:.75rem;
-    }
-    .info-box{ background: linear-gradient(135deg, rgba(59,130,246,.10), rgba(59,130,246,.06)); border-left:4px solid #3b82f6; }
-    .warn-box{ background: linear-gradient(135deg, rgba(245,158,11,.10), rgba(251,191,36,.10)); border-left:4px solid #f59e0b; }
-    .highlight-box{ background: linear-gradient(135deg, rgba(16,185,129,.10), rgba(110,231,183,.10)); border-left:4px solid #10b981; }
-
-    @media (max-width: 1024px){
-      .grid{ grid-template-columns: 1fr; }
-    }
-    @media (max-width: 768px){
-      .container{ margin:10px;border-radius: var(--radius-md); }
-      .content-wrapper{ padding: var(--spacing-xl) var(--spacing-lg); }
-    }
-  </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Cabeçalho -->
-    <div class="page-header">
-      <h1><i class="fas fa-screwdriver-wrench"></i> Status & Manutenção</h1>
-      <p>DasLoto — Fechamentos &amp; Análises</p>
-      <div class="last-updated">
-        <i class="fas fa-calendar-alt" style="margin-right:.5rem;"></i>
-        Última atualização: 22 de outubro de 2025 · 10:00 BRT
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img src="../assets/images/logo_dark_mark_lefth.svg" alt="DasLoto">
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars text-white"></i>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="navbar-nav ms-auto align-items-center">
+          <a class="nav-link" href="/#recursos">Recursos</a>
+          <a class="nav-link" href="/#ferramentas">Ferramentas</a>
+          <a class="nav-link" href="/projects/about.html">Sobre</a>
+          <a class="nav-link" href="/projects/policies.html">Políticas</a>
+        </div>
       </div>
     </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div style="padding-top: 100px; min-height: 100vh;">
+    <div class="container" style="max-width: 900px; padding-top: 40px; padding-bottom: 40px; display: flex; align-items: center; justify-content: center; min-height: calc(100vh - 240px);">
 
     <div class="content-wrapper">
-      <!-- Banner de Status -->
-      <div class="status-banner" data-aos="fade-up">
-        <span class="status-indicator status-warn"></span>
-        <div>
-          <strong>Status atual:</strong> Manutenção programada em andamento
-          <div class="muted">Algumas funcionalidades podem apresentar lentidão ou indisponibilidade temporária.</div>
+      <!-- Maintenance Card -->
+      <div class="card maintenance-main" data-aos="fade-up" style="text-align: center;">
+        <!-- Logo -->
+        <div style="margin-bottom: 2rem;">
+          <img src="../assets/images/logo_dark_mark_lefth.svg" alt="DasLoto" style="height: 80px; width: auto;">
         </div>
-        <span class="badge" title="ID da manutenção">
-          <i class="fa-solid fa-hashtag"></i> MNT-2025-10-22-A
-        </span>
-      </div>
 
-      <!-- Grid principal -->
-      <div class="grid" style="margin-top:1rem">
-        <!-- Janela de manutenção -->
-        <div class="card" data-aos="fade-up">
-          <h3><i class="fa-solid fa-clock-rotate-left"></i> Janela de manutenção</h3>
-          <div class="kvs">
-            <div class="kvs-item"><i class="fa-regular fa-calendar"></i> <span><strong>Início:</strong> 22/10/2025 09:30</span></div>
-            <div class="kvs-item"><i class="fa-regular fa-calendar-check"></i> <span><strong>Previsão de término:</strong> 22/10/2025 12:00</span></div>
-            <div class="kvs-item"><i class="fa-solid fa-circle-info"></i> <span><strong>Tipo:</strong> Atualização de infraestrutura e serviços</span></div>
+        <!-- Status -->
+        <div style="margin-bottom: 2rem;">
+          <h2 style="color: var(--text-light); font-weight: 700; margin-bottom: 0.5rem;">Manutenção em Andamento</h2>
+          <p style="color: var(--text-muted); font-size: 1.1rem;">Sistema em atualização</p>
+        </div>
+
+        <!-- Progress -->
+        <div style="margin-bottom: 2rem; max-width: 400px; margin-left: auto; margin-right: auto;">
+          <div class="maintenance-progress-bar" style="height: 12px;">
+            <span style="width: 65%;"></span>
           </div>
-
-          <div class="info-box" style="margin-top:1rem">
-            <strong>Escopo:</strong> melhorias no simulador, ajustes no ranking, otimizações de banco de dados e estabilidade das consultas de resultados oficiais.
+          <div class="maintenance-progress-text" style="margin-top: 1rem;">
+            <span style="font-size: 1rem;">Progresso da atualização</span>
+            <span style="font-size: 1rem; font-weight: 600; color: #4f46e5;">65%</span>
           </div>
         </div>
 
-        <!-- Itens sendo atualizados -->
-        <div class="card" data-aos="fade-up">
-          <h3><i class="fa-solid fa-list-check"></i> Itens sendo atualizados</h3>
-
-          <div class="list">
-            <div class="list-item">
-              <i class="fa-solid fa-flask"></i>
-              <div style="flex:1">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                  <strong>Simulador de palpites</strong>
-                  <span class="badge"><i class="fa-solid fa-spinner fa-spin"></i> Em progresso</span>
-                </div>
-                <div class="muted">Refatoração de filtros e ganho de performance nas combinações.</div>
-                <div class="progress" style="margin-top:.5rem"><span style="width:70%"></span></div>
-              </div>
-            </div>
-
-            <div class="list-item">
-              <i class="fa-solid fa-trophy"></i>
-              <div style="flex:1">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                  <strong>Ranking de membros</strong>
-                  <span class="badge"><i class="fa-regular fa-circle-check"></i> Validando</span>
-                </div>
-                <div class="muted">Correção de contagem e consistência entre períodos.</div>
-                <div class="progress" style="margin-top:.5rem"><span style="width:90%"></span></div>
-              </div>
-            </div>
-
-            <div class="list-item">
-              <i class="fa-solid fa-database"></i>
-              <div style="flex:1">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                  <strong>Otimizações no banco</strong>
-                  <span class="badge"><i class="fa-solid fa-spinner fa-spin"></i> Em progresso</span>
-                </div>
-                <div class="muted">Índices e rotinas de limpeza para histórico de simulações.</div>
-                <div class="progress" style="margin-top:.5rem"><span style="width:45%"></span></div>
-              </div>
-            </div>
-
-            <div class="list-item">
-              <i class="fa-solid fa-satellite-dish"></i>
-              <div style="flex:1">
-                <div style="display:flex;justify-content:space-between;align-items:center;">
-                  <strong>Consulta de resultados</strong>
-                  <span class="badge"><i class="fa-solid fa-triangle-exclamation"></i> Intermitente</span>
-                </div>
-                <div class="muted">Melhorias de resiliência nas integrações.</div>
-                <div class="progress" style="margin-top:.5rem"><span style="width:30%"></span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Componentes do sistema -->
-        <div class="card" data-aos="fade-up">
-          <h3><i class="fa-solid fa-diagram-project"></i> Componentes</h3>
-          <div class="list">
-            <div class="component">
-              <div class="title"><i class="fa-solid fa-mobile-screen-button"></i> App DasLoto (Android)</div>
-              <div class="state state-partial">Parcial</div>
-            </div>
-            <div class="component">
-              <div class="title"><i class="fa-solid fa-server"></i> API pública</div>
-              <div class="state state-ok">Operacional</div>
-            </div>
-            <div class="component">
-              <div class="title"><i class="fa-solid fa-database"></i> Banco de dados</div>
-              <div class="state state-partial">Parcial</div>
-            </div>
-            <div class="component">
-              <div class="title"><i class="fa-solid fa-bell"></i> Notificações</div>
-              <div class="state state-ok">Operacional</div>
-            </div>
-            <div class="component">
-              <div class="title"><i class="fa-solid fa-trophy"></i> Rankings</div>
-              <div class="state state-partial">Parcial</div>
-            </div>
-          </div>
-          <div class="warn-box" style="margin-top:1rem">
-            Em caso de instabilidade, reinicie o app e tente novamente após alguns minutos.
-          </div>
-        </div>
-
-        <!-- Changelog / Ocorrências -->
-        <div class="card" data-aos="fade-up">
-          <h3><i class="fa-regular fa-newspaper"></i> Ocorrências & changelog</h3>
-          <div class="timeline">
-            <div class="tl-item">
-              <div><strong>22/10/2025 09:30</strong> · Início da manutenção programada</div>
-              <div class="muted">Deploy de novas rotinas de consulta e índices de banco.</div>
-            </div>
-            <div class="tl-item">
-              <div><strong>21/10/2025 20:10</strong> · Correção</div>
-              <div class="muted">Ajuste no cálculo do ranking semanal (consistência entre dias).</div>
-            </div>
-            <div class="tl-item">
-              <div><strong>21/10/2025 12:40</strong> · Melhoria</div>
-              <div class="muted">Otimização do simulador: tempo médio de resposta -18%.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ rápida -->
-      <div class="card" data-aos="fade-up" style="margin-top:1rem">
-        <h3><i class="fa-regular fa-circle-question"></i> Perguntas rápidas</h3>
-        <div class="list">
-          <div class="list-item">
-            <i class="fa-solid fa-hourglass-half"></i>
-            <div>
-              <strong>O que acontece com minhas simulações durante a manutenção?</strong>
-              <div class="muted">Elas permanecem salvas. Em caso de erro de consulta, tente novamente após a janela.</div>
-            </div>
-          </div>
-          <div class="list-item">
-            <i class="fa-solid fa-rotate-right"></i>
-            <div>
-              <strong>Preciso atualizar o app?</strong>
-              <div class="muted">Nem sempre. Se houver nova versão obrigatória, avisaremos no app.</div>
-            </div>
-          </div>
-          <div class="list-item">
-            <i class="fa-solid fa-shield-halved"></i>
-            <div>
-              <strong>Meus dados estão seguros?</strong>
-              <div class="muted">Sim. Backups e controles de acesso seguem boas práticas de segurança.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Contato -->
-      <div class="contact-section" data-aos="fade-up">
-        <h3>Precisa de ajuda?</h3>
-        <p>Se algo não estiver funcionando, entre em contato com nosso suporte.</p>
-        <a href="mailto:ajuda@dasloto.com" class="contact-button">
-          <i class="fas fa-envelope" style="margin-right:.5rem;"></i> Enviar e-mail
-        </a>
-        <a href="policies.html" class="contact-button">
-          <i class="fas fa-file-alt" style="margin-right:.5rem;"></i> Ver Políticas
-        </a>
+        <!-- Message -->
+        <p style="color: var(--text-muted); margin-bottom: 0; line-height: 1.7;">
+          Estamos realizando melhorias no sistema para oferecer uma experiência melhor.<br>
+          Por favor, volte em alguns minutos.
+        </p>
       </div>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-brand">
+            <img src="../assets/images/logo_dark_mark_lefth.svg" alt="DasLoto" class="footer-logo-img">
+            <p class="footer-description">
+              Aplicativo completo para análises e fechamentos de loterias. 
+              Desenvolva estratégias inteligentes com base em dados estatísticos.
+            </p>
+          </div>
+        </div>
+        
+        <div class="col-lg-2 col-md-6">
+          <h5 class="footer-title">Produto</h5>
+          <ul class="footer-links">
+            <li><a href="/#recursos"><i class="fas fa-cog me-2"></i>Recursos</a></li>
+            <li><a href="/#ferramentas"><i class="fas fa-tools me-2"></i>Ferramentas</a></li>
+            <li><a href="/projects/plans.html"><i class="fas fa-star me-2"></i>Planos</a></li>
+            <li><a href="/#avaliacoes"><i class="fas fa-comments me-2"></i>Avaliações</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-lg-2 col-md-6">
+          <h5 class="footer-title">Suporte</h5>
+          <ul class="footer-links">
+            <li><a href="/projects/about.html"><i class="fas fa-info-circle me-2"></i>Sobre Nós</a></li>
+            <li><a href="mailto:ajuda@dasloto.com"><i class="fas fa-envelope me-2"></i>Contato</a></li>
+            <li><a href="/projects/policies.html"><i class="fas fa-shield-alt me-2"></i>Privacidade</a></li>
+            <li><a href="/projects/delete-account.html"><i class="fas fa-user-times me-2"></i>Excluir Conta</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+          <h5 class="footer-title">Baixar Agora</h5>
+          <div class="download-links">
+            <a href="https://play.google.com/store/apps/details?id=dev.franciscocarlos.dasloto&hl=pt" target="_blank" rel="noopener" class="download-btn">
+              <i class="fab fa-google-play"></i>
+              <div>
+                <small>Disponível no</small>
+                <strong>Google Play</strong>
+              </div>
+            </a>
+            <a href="https://app.dasloto.com" target="_blank" rel="noopener" class="download-btn">
+              <i class="fas fa-globe"></i>
+              <div>
+                <small>Acesse a</small>
+                <strong>Versão Web</strong>
+              </div>
+            </a>
+          </div>
+          
+          <div class="social-links">
+            <a href="mailto:ajuda@dasloto.com" class="social-link" aria-label="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://app.dasloto.com" class="social-link" aria-label="Site">
+              <i class="fas fa-globe"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <p class="copyright">
+              © <span id="year"></span> DasLoto. Todos os direitos reservados.
+            </p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <div class="footer-legal-links">
+              <a href="/projects/policies.html">Termos de Uso</a>
+              <span class="separator">•</span>
+              <a href="/projects/policies.html">Privacidade</a>
+              <span class="separator">•</span>
+              <a href="/projects/manutenance.html">Status</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <!-- Topo -->
   <a href="#" class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></a>
 
   <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init({ duration: 1000, once: true });
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+    });
 
-    // Botão voltar ao topo
+    // Update year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 100) {
+        navbar.style.background = 'rgba(15, 23, 42, 0.98)';
+        navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
+      } else {
+        navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+        navbar.style.boxShadow = 'none';
+      }
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offsetTop = target.offsetTop - 80;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Back to top button
     const backToTopButton = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', function() {
       if (window.scrollY > 300) backToTopButton.classList.add('show');
       else backToTopButton.classList.remove('show');
     });
-    backToTopButton.addEventListener('click', e => {
+    backToTopButton.addEventListener('click', function(e) {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // (Opcional) Atualizar barras de progresso dinamicamente via dataset (se quiser controlar por CMS)
+    // (Opcional) Atualizar barras de progresso dinamicamente via dataset
     document.querySelectorAll('.progress[data-value]').forEach(p => {
       const v = Number(p.dataset.value) || 0;
       p.querySelector('span').style.width = v + '%';
