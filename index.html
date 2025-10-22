@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DasLoto — Simulação & Análises de Loterias</title>
+
+  <!-- SEO / Social -->
+  <meta name="description" content="Simule e analise resultados de loterias com fechamentos matemáticos, filtros e rankings. Sem dinheiro real. Estudo e comparação." />
+  <meta property="og:title" content="DasLoto — Simulação & Análises de Loterias" />
+  <meta property="og:description" content="150+ fechamentos matemáticos, filtros avançados, rankings e conferência com resultados oficiais. Sem apostas com dinheiro real." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/og-dasloto.png" />
+  <meta property="og:url" content="https://www.dasloto.com/" />
+
+  <!-- Fonts & Libs -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Tema base do seu site -->
+  <link href="./assets/css/dark-theme.css" rel="stylesheet" />
+
+  <style>
+    :root{
+      --brand: var(--primary-color); /* herdado do seu tema */
+    }
+    body{
+      background: var(--bg-gradient-primary);
+      min-height:100vh;
+      color: var(--text-primary);
+    }
+    .container{
+      max-width:1160px;margin:0 auto;padding:96px 24px 48px;
+    }
+    .hero{
+      display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center;
+      padding-top:40px;
+    }
+    .pill{
+      display:inline-flex;align-items:center;gap:.5rem;
+      padding:.35rem .7rem;border:1px solid var(--border);border-radius:999px;
+      background: rgba(255,255,255,.04);font-weight:600;font-size:.85rem;
+    }
+    .hero h1{font-size:clamp(1.8rem,3.5vw,3rem);line-height:1.1;margin:.8rem 0;}
+    .hero p.lead{color:var(--text-secondary);font-size:1.05rem}
+    .cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.25rem}
+    .btn{
+      display:inline-flex;align-items:center;gap:.6rem;
+      padding:.85rem 1.1rem;border-radius:12px;border:1px solid var(--border);
+      background:var(--surface);text-decoration:none;color:var(--text-primary);font-weight:600;
+      transition:transform .08s ease, background .2s ease;
+    }
+    .btn.primary{background:var(--brand);color:#0b0b0b;border-color:transparent;}
+    .btn:hover{transform:translateY(-1px)}
+    .device{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid var(--border);border-radius:24px;padding:16px;aspect-ratio:9/16;
+      display:flex;align-items:center;justify-content:center;overflow:hidden;
+    }
+    .device img{width:100%;height:100%;object-fit:cover;border-radius:16px;opacity:.95}
+
+    .section{margin-top:72px}
+    .section h2{font-size:1.6rem;margin-bottom:1rem}
+    .muted{color:var(--text-secondary)}
+
+    .grid-3{
+      display:grid;gap:1rem;grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+    .card{
+      background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px;
+    }
+    .card h3{font-size:1.05rem;margin:.4rem 0}
+    .card i{color:var(--brand)}
+
+    .how{
+      display:grid;gap:1rem;grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+    .step{position:relative;padding:16px;border:1px dashed var(--border);border-radius:14px;background:rgba(255,255,255,.02)}
+    .step .num{
+      width:28px;height:28px;border-radius:999px;background:var(--brand);color:#0b0b0b;
+      display:inline-flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:.5rem;
+    }
+
+    .features{
+      display:grid;gap:1rem;grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    .feature{
+      display:flex;gap:.9rem;align-items:flex-start;background:var(--surface);
+      border:1px solid var(--border);border-radius:16px;padding:16px;
+    }
+    .feature i{color:var(--brand);font-size:1.1rem;margin-top:.2rem}
+
+    .notice{
+      background: linear-gradient(135deg, rgba(245,158,11,.10), rgba(251,191,36,.08));
+      border-left:4px solid #f59e0b;border-radius:12px;padding:14px;margin-top:18px;
+    }
+
+    .faq{display:grid;gap:1rem;grid-template-columns:repeat(2,minmax(0,1fr))}
+    details{border:1px solid var(--border);border-radius:12px;padding:14px;background:var(--surface)}
+    summary{cursor:pointer;font-weight:600}
+
+    .footer{
+      display:grid;gap:1rem;grid-template-columns:repeat(4,minmax(0,1fr));
+      margin-top:48px;padding-top:24px;border-top:1px solid var(--border);
+    }
+    .footer a{color:var(--text-secondary);text-decoration:none}
+    .footer a:hover{color:var(--text-primary)}
+    @media (max-width:1024px){
+      .hero{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr 1fr}
+      .how{grid-template-columns:1fr 1fr 1fr}
+      .features{grid-template-columns:1fr}
+      .footer{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:768px){
+      .grid-3{grid-template-columns:1fr}
+      .how{grid-template-columns:1fr}
+      .faq{grid-template-columns:1fr}
+      .container{padding-top:84px}
+    }
+  </style>
+</head>
+<body>
+  <header class="container" style="padding-top:32px;padding-bottom:0">
+    <nav style="display:flex;justify-content:space-between;align-items:center;gap:1rem;">
+      <a href="#" class="pill"><i class="fa-solid fa-dice"></i> <span>DasLoto</span></a>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+        <a class="btn" href="#recursos">Recursos</a>
+        <a class="btn" href="#como-funciona">Como funciona</a>
+        <a class="btn" href="#faq">FAQ</a>
+        <a class="btn primary" href="https://play.google.com/store/apps/details?id=dev.franciscocarlos.dasloto&hl=gsw" target="_blank" rel="noopener">
+          <i class="fa-brands fa-google-play"></i> Baixar na Play Store
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero" data-aos="fade-up">
+      <div>
+        <span class="pill"><i class="fa-solid fa-flask"></i> Estudos e simulações</span>
+        <h1>Simule, analise e compare — sem dinheiro real.</h1>
+        <p class="lead">
+          Explore <strong>150+ fechamentos matemáticos</strong>, filtros e estatísticas para estudar padrões
+          e conferir com resultados oficiais — tudo em um só lugar. :contentReference[oaicite:1]{index=1}
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="https://play.google.com/store/apps/details?id=dev.franciscocarlos.dasloto&hl=gsw" target="_blank" rel="noopener">
+            <i class="fa-brands fa-google-play"></i> Instalar agora
+          </a>
+          <a class="btn" href="https://app.dasloto.com" target="_blank" rel="noopener">
+            <i class="fa-solid fa-globe"></i> Usar versão web
+          </a>
+          <a class="btn" href="policies.html">
+            <i class="fa-solid fa-shield-halved"></i> Políticas
+          </a>
+        </div>
+        <div class="muted" style="margin-top:.8rem">Sem vínculo com a Caixa. Não há apostas com dinheiro real.</div>
+      </div>
+      <div>
+        <div class="device" aria-label="Prévia do aplicativo">
+          <!-- coloque um print real do app em assets/hero-preview.png -->
+          <img src="assets/hero-preview.png" alt="Tela do DasLoto" />
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFÍCIOS (3 colunas) -->
+    <section class="section" id="beneficios" data-aos="fade-up">
+      <div class="grid-3">
+        <div class="card">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <h3>Fechamentos matemáticos</h3>
+          <p class="muted">Apoie seus estudos em combinações otimizadas e reduza o universo de possibilidades.</p>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-filter"></i>
+          <h3>Filtros & estatísticas</h3>
+          <p class="muted">Pares/ímpares, colunas, ciclos, repetidas, primos, soma e mais — visualize padrões.</p>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-trophy"></i>
+          <h3>Ranking da comunidade</h3>
+          <p class="muted">Compare desempenho de palpites e evolua com insights do ranking.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECURSOS (lista) -->
+    <section class="section" id="recursos" data-aos="fade-up">
+      <h2>Recursos que você encontra no DasLoto</h2>
+      <div class="features">
+        <div class="feature">
+          <i class="fa-solid fa-lightbulb"></i>
+          <div>
+            <strong>Criação de palpites</strong>
+            <div class="muted">Monte palpites a partir de regras, exclusões e fixações de dezenas.</div>
+          </div>
+        </div>
+        <div class="feature">
+          <i class="fa-solid fa-list-check"></i>
+          <div>
+            <strong>Simulações de jogos</strong>
+            <div class="muted">Teste cenários e entenda impactos por faixa de acertos.</div>
+          </div>
+        </div>
+        <div class="feature">
+          <i class="fa-solid fa-check-circle"></i>
+          <div>
+            <strong>Conferência com resultados</strong>
+            <div class="muted">Valide suas simulações com resultados oficiais divulgados.</div>
+          </div>
+        </div>
+        <div class="feature">
+          <i class="fa-solid fa-bolt"></i>
+          <div>
+            <strong>Performance</strong>
+            <div class="muted">Geração rápida de combinações e análises, mesmo em grandes volumes.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice">
+        <strong>Importante:</strong> As premiações exibidas são <em>simulações</em> para estudo e comparação.
+        Valide jogos apenas pelos canais oficiais. O app <strong>não permite apostas com dinheiro real</strong>.
+      </div>
+    </section>
+
+    <!-- COMO FUNCIONA (3 passos) -->
+    <section class="section" id="como-funciona" data-aos="fade-up">
+      <h2>Como funciona</h2>
+      <div class="how">
+        <div class="step">
+          <div class="num">1</div>
+          <h3>Escolha filtros</h3>
+          <p class="muted">Defina critérios (fixar, excluir, pares/ímpares, etc.).</p>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <h3>Gere simulações</h3>
+          <p class="muted">Crie combinações com base em fechamentos matemáticos.</p>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <h3>Confira & compare</h3>
+          <p class="muted">Compare com resultados oficiais e acompanhe no ranking.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROVAS SOCIAIS (placeholders) -->
+    <section class="section" data-aos="fade-up">
+      <h2>O que dizem nossos usuários</h2>
+      <div class="grid-3">
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:.5rem">
+            <img src="assets/avatar1.png" alt="Usuário A" width="40" height="40" style="border-radius:50%">
+            <div><strong>Marcos</strong><div class="muted">Estudos em Lotofácil</div></div>
+          </div>
+          <p class="muted" style="margin-top:.6rem">“Ferramentas completas para estudar padrões. Curti o ranking.”</p>
+        </div>
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:.5rem">
+            <img src="assets/avatar2.png" alt="Usuário B" width="40" height="40" style="border-radius:50%">
+            <div><strong>Ana</strong><div class="muted">Simulações</div></div>
+          </div>
+          <p class="muted" style="margin-top:.6rem">“Fechamentos e filtros salvaram um bom tempo do meu estudo.”</p>
+        </div>
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:.5rem">
+            <img src="assets/avatar3.png" alt="Usuário C" width="40" height="40" style="border-radius:50%">
+            <div><strong>Lucas</strong><div class="muted">Comparações</div></div>
+          </div>
+          <p class="muted" style="margin-top:.6rem">“Curti a conferência com resultados e a velocidade.”</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq" data-aos="fade-up">
+      <h2>Perguntas frequentes</h2>
+      <div class="faq">
+        <details>
+          <summary>O DasLoto realiza apostas com dinheiro real?</summary>
+          <p class="muted">Não. O DasLoto é uma plataforma de simulação e estudo. Não há transações monetárias nem vínculo com a Caixa.</p>
+        </details>
+        <details>
+          <summary>Como funcionam os “fechamentos”?</summary>
+          <p class="muted">São combinações matemáticas que reduzem o universo de jogos mantendo cobertura estatística para análise.</p>
+        </details>
+        <details>
+          <summary>Posso conferir com resultados oficiais?</summary>
+          <p class="muted">Sim. Você pode comparar suas simulações com resultados divulgados oficialmente.</p>
+        </details>
+        <details>
+          <summary>Existe versão web?</summary>
+          <p class="muted">Sim. Acesse <a href="https://app.dasloto.com" target="_blank" rel="noopener">app.dasloto.com</a>.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="section" data-aos="fade-up" style="text-align:center">
+      <h2>Pronto para estudar com mais recursos?</h2>
+      <p class="muted">Instale agora e comece a simular combinações com poucos toques.</p>
+      <div class="cta" style="justify-content:center">
+        <a class="btn primary" href="https://play.google.com/store/apps/details?id=dev.franciscocarlos.dasloto&hl=gsw" target="_blank" rel="noopener">
+          <i class="fa-brands fa-google-play"></i> Baixar na Play Store
+        </a>
+        <a class="btn" href="https://app.dasloto.com" target="_blank" rel="noopener">
+          <i class="fa-solid fa-globe"></i> Usar versão web
+        </a>
+      </div>
+    </section>
+
+    <!-- LEGAL -->
+    <section class="section" data-aos="fade-up">
+      <div class="card">
+        <h3><i class="fa-solid fa-scale-balanced" style="color:var(--brand)"></i> Isenção & responsabilidade</h3>
+        <p class="muted">
+          O DasLoto <strong>não possui vínculo com a Loteria Oficial da Caixa Econômica Federal</strong>. As informações e simulações têm caráter
+          <strong>estritamente informativo</strong> e não substituem a conferência oficial. Para ter validade, o jogador deve validar sempre pelas
+          loterias oficiais.
+        </p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div>
+        <strong>DasLoto</strong>
+        <p class="muted">Fechamentos & análises para estudo — sem dinheiro real.</p>
+      </div>
+      <div>
+        <strong>Links</strong>
+        <ul style="list-style:none;padding:0;margin:0">
+          <li><a href="policies.html">Política de Privacidade</a></li>
+          <li><a href="excluir-dados-dasloto.html">Exclusão de Dados</a></li>
+          <li><a href="status-dasloto.html">Status & Manutenção</a></li>
+          <li><a href="sobre-dasloto.html">Sobre</a></li>
+        </ul>
+      </div>
+      <div>
+        <strong>Contato</strong>
+        <ul style="list-style:none;padding:0;margin:0">
+          <li><a href="mailto:ajuda@dasloto.com">ajuda@dasloto.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <strong>Disponível em</strong>
+        <p><a href="https://play.google.com/store/apps/details?id=dev.franciscocarlos.dasloto&hl=gsw" target="_blank" rel="noopener">Google Play</a></p>
+        <p><a href="https://app.dasloto.com" target="_blank" rel="noopener">Versão Web</a></p>
+      </div>
+    </footer>
+
+    <div style="text-align:center;margin-top:16px" class="muted">
+      © <span id="year"></span> DasLoto — Todos os direitos reservados.
+    </div>
+  </main>
+
+  <!-- Back to top -->
+  <a href="#" class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 900, once: true });
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const backToTopButton = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) backToTopButton.classList.add('show');
+      else backToTopButton.classList.remove('show');
+    });
+    backToTopButton.addEventListener('click', e => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
